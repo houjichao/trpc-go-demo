@@ -12,5 +12,7 @@ func (s *greeterImpl) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.H
 	// implement business logic here ...
 	// ...
 	rsp := &pb.HelloReply{}
+	rsp.Msg = req.GetMsg()
+	println(rsp.Msg)
 	return rsp, nil
 }
