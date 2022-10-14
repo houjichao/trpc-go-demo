@@ -6,7 +6,15 @@ option go_package="github.com/houjichao/trpcprotocol";
 // 定义服务接口
 service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply) {}
+
+  rpc Demo1 (HelloRequest) returns (HelloReply) {}
 }
+
+// 定义服务接口，一个server（服务进程）可以有多个service（对rpc逻辑分组），一般是一个server一个service，一个service中可以有多个rpc调用。
+service Demo1 {
+  rpc Demo1 (HelloRequest) returns (HelloReply) {}
+}
+
 // 请求参数
 message HelloRequest {
   string msg = 1;

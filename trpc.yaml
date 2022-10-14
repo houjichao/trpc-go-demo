@@ -1,10 +1,10 @@
 global:                             #全局配置
   namespace: Development            #环境类型，分正式Production和非正式Development两种类型
 server:                                            #服务端配置
-  app: test                                        #业务的应用名
-  server: helloworld                               #进程服务名
+  app: houjichao                                        #业务的应用名
+  server: demo                               #进程服务名
   service:                                         #业务服务提供的service，可以有多个
-    - name: trpc.test.helloworld.Greeter           #service的路由名称
+    - name: trpc.houjichao.demo.Greeter           #service的路由名称
       ip: 127.0.0.1                                #服务监听ip地址 可使用占位符 ${ip},ip和nic二选一，优先ip
       port: 8000                                   #服务监听端口 可使用占位符 ${port}
       network: tcp                                 #网络监听类型  tcp udp

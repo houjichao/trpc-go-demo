@@ -19,6 +19,7 @@ import (
 func main() {
 	s := trpc.NewServer()
 	pb.RegisterGreeterService(s, &greeterImpl{})
+	pb.RegisterDemo1Service(s, &demo1Impl{})
 	if err := s.Serve(); err != nil {
 		log.Fatal(err)
 	}

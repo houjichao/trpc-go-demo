@@ -19,6 +19,13 @@ server:                                            #服务端配置
       network: tcp                             #网络监听类型  tcp udp
       protocol: trpc               #应用层协议 trpc http
       timeout: 1000                            #请求最长处理时间 单位 毫秒
+    - name: trpc.houjichao.demo.Demo1      #service 的路由名称
+      ip: 127.0.0.1                            #服务监听 ip 地址 可使用占位符 ${ip},ip 和 nic 二选一，优先 ip
+      #nic: eth0
+      port: 8001                #服务监听端口 可使用占位符 ${port}
+      network: tcp                             #网络监听类型  tcp udp
+      protocol: trpc               #应用层协议 trpc http
+      timeout: 1000                            #请求最长处理时间 单位 毫秒
     
 
 client:                                            #客户端调用的后端配置
@@ -27,6 +34,12 @@ client:                                            #客户端调用的后端配�
   filter:                                          #针对所有后端调用函数前后的拦截器列表
   service:                                         #针对单个后端的配置
     - name: trpc.houjichao.demo.Greeter      #后端服务的 service name
+      namespace: Development                   #后端服务的环境
+      network: tcp                             #后端服务的网络类型 tcp udp 配置优先
+      protocol: trpc               #应用层协议 trpc http
+      target: ip://127.0.0.1:8000              #请求服务地址
+      timeout: 1000                            #请求最长处理时间
+    - name: trpc.houjichao.demo.Demo1      #后端服务的 service name
       namespace: Development                   #后端服务的环境
       network: tcp                             #后端服务的网络类型 tcp udp 配置优先
       protocol: trpc               #应用层协议 trpc http

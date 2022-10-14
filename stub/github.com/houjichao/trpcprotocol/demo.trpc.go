@@ -20,6 +20,8 @@ import (
 // GreeterService defines service
 type GreeterService interface {
 	SayHello(ctx context.Context, req *HelloRequest) (*HelloReply, error)
+
+	Demo1(ctx context.Context, req *HelloRequest) (*HelloReply, error)
 }
 
 func GreeterService_SayHello_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -42,6 +44,26 @@ func GreeterService_SayHello_Handler(svr interface{}, ctx context.Context, f ser
 	return rsp, nil
 }
 
+func GreeterService_Demo1_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+
+	req := &HelloRequest{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(GreeterService).Demo1(ctx, reqbody.(*HelloRequest))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+
+	return rsp, nil
+}
+
 // GreeterServer_ServiceDesc descriptor for server.RegisterService
 var GreeterServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "trpc.houjichao.demo.Greeter",
@@ -50,6 +72,10 @@ var GreeterServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/trpc.houjichao.demo.Greeter/SayHello",
 			Func: GreeterService_SayHello_Handler,
+		},
+		{
+			Name: "/trpc.houjichao.demo.Greeter/Demo1",
+			Func: GreeterService_Demo1_Handler,
 		},
 	},
 }
@@ -62,11 +88,58 @@ func RegisterGreeterService(s server.Service, svr GreeterService) {
 
 }
 
+// Demo1Service defines service
+type Demo1Service interface {
+	Demo1(ctx context.Context, req *HelloRequest) (*HelloReply, error)
+}
+
+func Demo1Service_Demo1_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+
+	req := &HelloRequest{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(Demo1Service).Demo1(ctx, reqbody.(*HelloRequest))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+
+	return rsp, nil
+}
+
+// Demo1Server_ServiceDesc descriptor for server.RegisterService
+var Demo1Server_ServiceDesc = server.ServiceDesc{
+	ServiceName: "trpc.houjichao.demo.Demo1",
+	HandlerType: ((*Demo1Service)(nil)),
+	Methods: []server.Method{
+		{
+			Name: "/trpc.houjichao.demo.Demo1/Demo1",
+			Func: Demo1Service_Demo1_Handler,
+		},
+	},
+}
+
+// RegisterDemo1Service register service
+func RegisterDemo1Service(s server.Service, svr Demo1Service) {
+	if err := s.Register(&Demo1Server_ServiceDesc, svr); err != nil {
+		panic(fmt.Sprintf("Demo1 register error:%v", err))
+	}
+
+}
+
 /* ************************************ Client Definition ************************************ */
 
 // GreeterClientProxy defines service client proxy
 type GreeterClientProxy interface {
 	SayHello(ctx context.Context, req *HelloRequest, opts ...client.Option) (rsp *HelloReply, err error)
+
+	Demo1(ctx context.Context, req *HelloRequest, opts ...client.Option) (rsp *HelloReply, err error)
 }
 
 type GreeterClientProxyImpl struct {
@@ -89,6 +162,72 @@ func (c *GreeterClientProxyImpl) SayHello(ctx context.Context, req *HelloRequest
 	msg.WithCalleeServer("demo")
 	msg.WithCalleeService("Greeter")
 	msg.WithCalleeMethod("SayHello")
+	msg.WithSerializationType(codec.SerializationTypePB)
+
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+
+	rsp := &HelloReply{}
+
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+
+	return rsp, nil
+}
+
+func (c *GreeterClientProxyImpl) Demo1(ctx context.Context, req *HelloRequest, opts ...client.Option) (*HelloReply, error) {
+
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+
+	msg.WithClientRPCName("/trpc.houjichao.demo.Greeter/Demo1")
+	msg.WithCalleeServiceName(GreeterServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("houjichao")
+	msg.WithCalleeServer("demo")
+	msg.WithCalleeService("Greeter")
+	msg.WithCalleeMethod("Demo1")
+	msg.WithSerializationType(codec.SerializationTypePB)
+
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+
+	rsp := &HelloReply{}
+
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+
+	return rsp, nil
+}
+
+// Demo1ClientProxy defines service client proxy
+type Demo1ClientProxy interface {
+	Demo1(ctx context.Context, req *HelloRequest, opts ...client.Option) (rsp *HelloReply, err error)
+}
+
+type Demo1ClientProxyImpl struct {
+	client client.Client
+	opts   []client.Option
+}
+
+var NewDemo1ClientProxy = func(opts ...client.Option) Demo1ClientProxy {
+	return &Demo1ClientProxyImpl{client: client.DefaultClient, opts: opts}
+}
+
+func (c *Demo1ClientProxyImpl) Demo1(ctx context.Context, req *HelloRequest, opts ...client.Option) (*HelloReply, error) {
+
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+
+	msg.WithClientRPCName("/trpc.houjichao.demo.Demo1/Demo1")
+	msg.WithCalleeServiceName(Demo1Server_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("houjichao")
+	msg.WithCalleeServer("demo")
+	msg.WithCalleeService("Demo1")
+	msg.WithCalleeMethod("Demo1")
 	msg.WithSerializationType(codec.SerializationTypePB)
 
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))

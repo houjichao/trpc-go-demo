@@ -35,6 +35,21 @@ func (m *MockGreeterService) EXPECT() *MockGreeterServiceMockRecorder {
 	return m.recorder
 }
 
+// Demo1 mocks base method.
+func (m *MockGreeterService) Demo1(ctx context.Context, req *HelloRequest) (*HelloReply, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Demo1", ctx, req)
+	ret0, _ := ret[0].(*HelloReply)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Demo1 indicates an expected call of Demo1.
+func (mr *MockGreeterServiceMockRecorder) Demo1(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Demo1", reflect.TypeOf((*MockGreeterService)(nil).Demo1), ctx, req)
+}
+
 // SayHello mocks base method.
 func (m *MockGreeterService) SayHello(ctx context.Context, req *HelloRequest) (*HelloReply, error) {
 	m.ctrl.T.Helper()
@@ -48,6 +63,44 @@ func (m *MockGreeterService) SayHello(ctx context.Context, req *HelloRequest) (*
 func (mr *MockGreeterServiceMockRecorder) SayHello(ctx, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SayHello", reflect.TypeOf((*MockGreeterService)(nil).SayHello), ctx, req)
+}
+
+// MockDemo1Service is a mock of Demo1Service interface.
+type MockDemo1Service struct {
+	ctrl     *gomock.Controller
+	recorder *MockDemo1ServiceMockRecorder
+}
+
+// MockDemo1ServiceMockRecorder is the mock recorder for MockDemo1Service.
+type MockDemo1ServiceMockRecorder struct {
+	mock *MockDemo1Service
+}
+
+// NewMockDemo1Service creates a new mock instance.
+func NewMockDemo1Service(ctrl *gomock.Controller) *MockDemo1Service {
+	mock := &MockDemo1Service{ctrl: ctrl}
+	mock.recorder = &MockDemo1ServiceMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockDemo1Service) EXPECT() *MockDemo1ServiceMockRecorder {
+	return m.recorder
+}
+
+// Demo1 mocks base method.
+func (m *MockDemo1Service) Demo1(ctx context.Context, req *HelloRequest) (*HelloReply, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Demo1", ctx, req)
+	ret0, _ := ret[0].(*HelloReply)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Demo1 indicates an expected call of Demo1.
+func (mr *MockDemo1ServiceMockRecorder) Demo1(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Demo1", reflect.TypeOf((*MockDemo1Service)(nil).Demo1), ctx, req)
 }
 
 // MockGreeterClientProxy is a mock of GreeterClientProxy interface.
@@ -73,6 +126,26 @@ func (m *MockGreeterClientProxy) EXPECT() *MockGreeterClientProxyMockRecorder {
 	return m.recorder
 }
 
+// Demo1 mocks base method.
+func (m *MockGreeterClientProxy) Demo1(ctx context.Context, req *HelloRequest, opts ...client.Option) (*HelloReply, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Demo1", varargs...)
+	ret0, _ := ret[0].(*HelloReply)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Demo1 indicates an expected call of Demo1.
+func (mr *MockGreeterClientProxyMockRecorder) Demo1(ctx, req interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Demo1", reflect.TypeOf((*MockGreeterClientProxy)(nil).Demo1), varargs...)
+}
+
 // SayHello mocks base method.
 func (m *MockGreeterClientProxy) SayHello(ctx context.Context, req *HelloRequest, opts ...client.Option) (*HelloReply, error) {
 	m.ctrl.T.Helper()
@@ -91,4 +164,47 @@ func (mr *MockGreeterClientProxyMockRecorder) SayHello(ctx, req interface{}, opt
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SayHello", reflect.TypeOf((*MockGreeterClientProxy)(nil).SayHello), varargs...)
+}
+
+// MockDemo1ClientProxy is a mock of Demo1ClientProxy interface.
+type MockDemo1ClientProxy struct {
+	ctrl     *gomock.Controller
+	recorder *MockDemo1ClientProxyMockRecorder
+}
+
+// MockDemo1ClientProxyMockRecorder is the mock recorder for MockDemo1ClientProxy.
+type MockDemo1ClientProxyMockRecorder struct {
+	mock *MockDemo1ClientProxy
+}
+
+// NewMockDemo1ClientProxy creates a new mock instance.
+func NewMockDemo1ClientProxy(ctrl *gomock.Controller) *MockDemo1ClientProxy {
+	mock := &MockDemo1ClientProxy{ctrl: ctrl}
+	mock.recorder = &MockDemo1ClientProxyMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockDemo1ClientProxy) EXPECT() *MockDemo1ClientProxyMockRecorder {
+	return m.recorder
+}
+
+// Demo1 mocks base method.
+func (m *MockDemo1ClientProxy) Demo1(ctx context.Context, req *HelloRequest, opts ...client.Option) (*HelloReply, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Demo1", varargs...)
+	ret0, _ := ret[0].(*HelloReply)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Demo1 indicates an expected call of Demo1.
+func (mr *MockDemo1ClientProxyMockRecorder) Demo1(ctx, req interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Demo1", reflect.TypeOf((*MockDemo1ClientProxy)(nil).Demo1), varargs...)
 }
