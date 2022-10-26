@@ -29,15 +29,15 @@ func ForDemo() {
 	map1[4] = 4.0
 
 	for key, value := range map1 {
-		fmt.Println("key is: %d - value is: %f\n", key, value)
+		fmt.Printf("key is: %d - value is: %f\n", key, value)
 	}
 
 	for key := range map1 {
-		fmt.Println("key is %d\n", key)
+		fmt.Printf("key is %d\n", key)
 	}
 
 	for _, value := range map1 {
-		fmt.Println("value is %f", value)
+		fmt.Printf("value is %f", value)
 	}
 
 }
