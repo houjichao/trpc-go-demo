@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"github.com/houjichao/trpc-go-demo/base"
+	"log"
 
 	pb "github.com/houjichao/trpcprotocol"
 )
@@ -21,5 +23,20 @@ func (s *greeterImpl) Demo1(ctx context.Context, req *pb.HelloRequest) (*pb.Hell
 	// ...
 	rsp := &pb.HelloReply{}
 	rsp.Msg = "Hello, I am tRPC-Go server."
+
+	var maxNum = base.Max(1,10)
+	println(maxNum)
+	log.Print(maxNum)
+
+	base.ArrayDemo()
+
+	base.MapDemo()
+
+	base.ForDemo()
+
+	base.ConstDemo()
+
+	base.VarDemo()
+
 	return rsp,nil
 }

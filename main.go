@@ -1,8 +1,6 @@
 package main
 
 import (
-	_ "git.woa.com/opentelemetry/opentelemetry-go-ecosystem/instrumentation/oteltrpc"
-
 	_ "git.code.oa.com/trpc-go/trpc-config-rainbow"
 	_ "git.code.oa.com/trpc-go/trpc-filter/debuglog"
 	_ "git.code.oa.com/trpc-go/trpc-filter/recovery"
@@ -12,8 +10,11 @@ import (
 	_ "git.code.oa.com/trpc-go/trpc-metrics-m007"
 	_ "git.code.oa.com/trpc-go/trpc-metrics-runtime"
 	_ "git.code.oa.com/trpc-go/trpc-naming-polaris"
+	_ "git.woa.com/opentelemetry/opentelemetry-go-ecosystem/instrumentation/oteltrpc"
 
 	pb "github.com/houjichao/trpcprotocol"
+
+	_ "github.com/houjichao/trpc-go-demo/base"
 )
 
 func main() {
@@ -23,4 +24,5 @@ func main() {
 	if err := s.Serve(); err != nil {
 		log.Fatal(err)
 	}
+
 }
