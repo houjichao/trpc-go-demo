@@ -38,5 +38,13 @@ func (s *greeterImpl) Demo1(ctx context.Context, req *pb.HelloRequest) (*pb.Hell
 
 	base.VarDemo()
 
+	base.StrDemo()
+
+	base.DataTypeConvertDemo()
+
+	base.BaseToStr()
+
+	base.StrToBaseDemo()
+
 	return rsp,nil
 }
