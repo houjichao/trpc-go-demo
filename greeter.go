@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"github.com/houjichao/trpc-go-demo/base"
+	"github.com/houjichao/trpc-go-demo/learn2"
 	"log"
 
 	pb "github.com/houjichao/trpcprotocol"
@@ -45,6 +46,8 @@ func (s *greeterImpl) Demo1(ctx context.Context, req *pb.HelloRequest) (*pb.Hell
 	base.BaseToStr()
 
 	base.StrToBaseDemo()
+
+	learn2.PointerDemo()
 
 	return rsp,nil
 }
