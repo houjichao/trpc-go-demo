@@ -49,5 +49,7 @@ func (s *greeterImpl) Demo1(ctx context.Context, req *pb.HelloRequest) (*pb.Hell
 
 	learn2.PointerDemo()
 
+	learn2.PointerDemo2()
+
 	return rsp,nil
 }
