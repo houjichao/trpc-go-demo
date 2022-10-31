@@ -3,28 +3,43 @@ package main
 import "fmt"
 
 /*
-	数组的几个注意事项
+	二维数组学习
 */
 func main() {
-	var arr1 = [3]int{1, 2, 3}
+	var arr1 [2][3]int16
 	fmt.Println(arr1)
-	//注意1：长度属于类型的一部分
-	fmt.Printf("数组的类型为:%T \n", arr1)
 
-	test(arr1)
-	//注意2：go中数组属值类型，在默认情况下是值传递，因此会进行值拷贝
-	fmt.Println(arr1) //[1 2 3]
+	//二维数组内存分析
+	fmt.Printf("arr的地址是:%p \n", &arr1)
+	fmt.Printf("arr[0]的地址是:%p \n", &arr1[0])
+	fmt.Printf("arr[0][0]的地址是:%p \n", &arr1[0][0])
 
-	//注意3：如想在其它函数中，去修改原来的数组，可以使用使用传递（指针方式）
-	test1(&arr1)
+	fmt.Printf("arr[1]的地址是:%p \n", &arr1[1])
+	fmt.Printf("arr[1][0]的地址是:%p \n", &arr1[1][0])
+
+	//赋值
+	arr1[0][1] = 47
 	fmt.Println(arr1)
-}
 
-func test(arr [3]int) {
-	arr[0] = 7
-}
+	//初始化操作
+	var arr2 = [2][3]int{{1, 2, 3}, {4, 5, 6}}
+	fmt.Println(arr2)
 
-func test1(arr *[3]int) {
-	//(*arr)[0] = 7
-	arr[0] = 7
+	//二维数组循环
+	var arr3 = [3][3]int{{1, 4, 7}, {2, 5, 8}, {3, 6, 9}}
+	//方式1:普通for循环
+	for i := 0; i < len(arr3); i++ {
+		for j := 0; j < len(arr3[i]); j++ {
+			fmt.Print(arr3[i][j], "\t")
+		}
+		fmt.Println()
+	}
+
+	//方式2：for-range循环
+	for k1, v1 := range arr3 {
+		for k2, v2 := range v1 {
+			fmt.Printf("arr[%v][%v]=%v \t", k1, k2, v2)
+		}
+		fmt.Println()
+	}
 }
