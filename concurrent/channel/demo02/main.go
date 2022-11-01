@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
 /*
@@ -15,25 +16,36 @@ func main() {
 	ch2 := make(chan string, 100)
 	defer close(ch1)
 	defer close(ch2)
+	go func() {
+		for i := 1; i < 10; i++ {
+			ch1 <- i
+			fmt.Println("ch1：", i)
+			time.Sleep(time.Second)
+		}
+	}()
 
-	for i := 1; i < 100; i++ {
-		ch1 <- i
-		fmt.Println("ch1：", i)
-	}
-
-	for i := 1; i < 100; i++ {
-		ch2 <- "a" + strconv.Itoa(i)
-		fmt.Println("ch2：", i)
-
-	}
+	go func() {
+		for i := 1; i < 10; i++ {
+			ch2 <- "a" + strconv.Itoa(i)
+			fmt.Println("ch2：", i)
+			time.Sleep(time.Second)
+		}
+	}()
 
 	for v := range ch1 {
 		fmt.Println(v)
+		//这里的条件控制要严格，如果是>9则会panic
+		if v == 9 {
+			break
+		}
 	}
 
 	for i := 0; i < len(ch2); i++ {
 		var value = <-ch2
 		fmt.Println(value)
+		if i == 9 {
+			break
+		}
 	}
 
 }
