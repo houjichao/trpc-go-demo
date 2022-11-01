@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"runtime"
+	"sync"
 )
 
 /*
@@ -18,24 +20,53 @@ import (
 	原子函数加锁
 	原子函数能够以底层的加锁机制来同步访问整型变量和指针
 */
+/*
+==================
+WARNING: DATA RACE
+Read at 0x00000122ec3c by goroutine 8:
+  main.incCount()
+      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/main.go:39 +0x7c
 
+Previous write at 0x00000122ec3c by goroutine 7:
+  main.incCount()
+      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/main.go:42 +0x9b
+
+Goroutine 8 (running) created at:
+  main.main()
+      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/main.go:32 +0x7c
+
+Goroutine 7 (finished) created at:
+  main.main()
+      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/main.go:31 +0x64
+==================
+4
+
+*/
 var (
-	counter int64
+	count int32
+	wg    sync.WaitGroup
 )
 
 func main() {
-	go incCounter(1)
-	go incCounter1(2)
+	wg.Add(2)
+	go incCount()
+	go incCount()
+	wg.Wait()
+	fmt.Println(count)
+}
+func incCount() {
+	defer wg.Done()
+	for i := 0; i < 2; i++ {
+		value := count
+		runtime.Gosched()
+		value++
+		count = value
+	}
 
-	fmt.Println(counter)
 }
 
-func incCounter(value int64) {
-	counter := value
-	fmt.Println(counter)
-}
-
-func incCounter1(value int64) {
-	value = counter
-	fmt.Println(value)
+func incCounter() {
+	value := count
+	count = value
+	fmt.Println(count)
 }
