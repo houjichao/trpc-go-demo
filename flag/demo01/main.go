@@ -18,7 +18,7 @@ String用指定的名称、默认值、使用信息注册一个string类型flag�
 一个-和两个-是一样的
 
 例如：
-go run main.go --mode=hello
+go run girl.go --mode=hello
 */
 
 //第一个参数为name 第二个参数为默认值 第三个参数是描述

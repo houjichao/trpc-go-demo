@@ -18,5 +18,5 @@ func main() {
 	//输出
 	fmt.Println(str)
 
-	//go run main.go -str="hello go"
+	//go run girl.go -str="hello go"
 }
