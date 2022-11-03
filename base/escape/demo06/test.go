@@ -12,6 +12,7 @@ func foo() {
 
 func bar() {
 	arr := make([]int, 0, 10)
+
 }
 
 func test() {
@@ -21,10 +22,10 @@ func test() {
 /*
 go build -gcflags "-m -l" test.go
 # command-line-arguments
-./test.go:8:13: make([]int, 0, length) escapes to heap
-./test.go:12:13: make([]int, 0, 10) does not escape
-./test.go:16:13: make([]int, 0, size) escapes to heap
-./test.go:8:2: arr declared but not used
-./test.go:12:2: arr declared but not used
-./test.go:16:2: arr declared but not used
+./test.go:10:13: make([]int, 0, length) escapes to heap
+./test.go:14:13: make([]int, 0, 10) does not escape
+./test.go:19:13: make([]int, 0, size) escapes to heap
+./test.go:10:2: arr declared but not used
+./test.go:14:2: arr declared but not used
+./test.go:19:2: arr declared but not used
 */
