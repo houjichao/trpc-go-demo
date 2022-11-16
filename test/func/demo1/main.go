@@ -29,10 +29,19 @@ func calc01(num1 int, num2 int) (int, int) {
 	return result01, result02
 }
 
-//升级写法：对函数返回值命名，里面顺序就无所谓了，顺序不用对应，注意是顺序，名字要一直
+//升级写法：对函数返回值命名，里面顺序就无所谓了，顺序不用对应，注意是顺序，名字要一致
 func calc02(num1 int, num2 int) (sum int, sub int) {
 	sum = num1 + num2
-	sub = num1 - num2
+	res := 5
+	return sum, res
+}
+
+func test04(num1 int, num2 int) (success map[string]interface{}, err error) {
+	res := map[string]interface{}{
+		"code":    "111",
+		"message": "222",
+	}
+	fmt.Println(res)
 	return
 }
 
@@ -69,8 +78,10 @@ func main() {
 	v1, v2 := calc01(10, 3)
 	fmt.Printf("v1对应的值为%v,v2对应的值为%v \n", v1, v2)
 
-
-
 	v3, v4 := calc02(20, 5)
 	fmt.Printf("v3对应的值为%v,v4对应的值为%v \n", v3, v4)
+
+	v5, v6 := test04(1, 2)
+	fmt.Printf("v5对应的值为%v,v6对应的值为%v \n", v5, v6)
+
 }
