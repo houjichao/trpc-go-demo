@@ -25,19 +25,19 @@ import (
 WARNING: DATA RACE
 Read at 0x00000122ec3c by goroutine 8:
   main.incCount()
-      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/main.go:39 +0x7c
+      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/chain_test.go:39 +0x7c
 
 Previous write at 0x00000122ec3c by goroutine 7:
   main.incCount()
-      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/main.go:42 +0x9b
+      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/chain_test.go:42 +0x9b
 
 Goroutine 8 (running) created at:
   main.main()
-      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/main.go:32 +0x7c
+      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/chain_test.go:32 +0x7c
 
 Goroutine 7 (finished) created at:
   main.main()
-      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/main.go:31 +0x64
+      /Users/houjichao/Work/Go/hjc/trpc-go-demo/concurrent/goroutine/demo05/chain_test.go:31 +0x64
 ==================
 4
 

@@ -13,10 +13,10 @@ func main() {
 	fmt.Println(b)
 
 	/*
-	go build -gcflags "-m -l" main.go
+	go build -gcflags "-m -l" chain_test.go
 	# command-line-arguments
-	./main.go:7:12: []int{...} escapes to heap
-	./main.go:13:13: ... argument does not escape
-	./main.go:13:13: b escapes to heap
+	./chain_test.go:7:12: []int{...} escapes to heap
+	./chain_test.go:13:13: ... argument does not escape
+	./chain_test.go:13:13: b escapes to heap
 	 */
 }

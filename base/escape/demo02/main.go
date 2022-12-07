@@ -10,7 +10,7 @@ func test2() int {
 func main() {
 	c2 := test2()
 	println(c2)
-	//go build -gcflags '-m -l' main.go
+	//go build -gcflags '-m -l' chain_test.go
 	/*
 	# command-line-arguments
 	./demo.go:12:13: ... argument does not escape

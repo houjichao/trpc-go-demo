@@ -17,14 +17,14 @@ func main() {
 	fmt.Println(in()) // 2
 
 	/*
-		go build -gcflags "-m -l" main.go
+		go build -gcflags "-m -l" chain_test.go
 		# command-line-arguments
-		./main.go:6:2: moved to heap: n
-		./main.go:7:9: func literal escapes to heap
-		./main.go:15:13: ... argument does not escape
-		./main.go:15:16: in() escapes to heap
-		./main.go:16:13: ... argument does not escape
-		./main.go:16:16: in() escapes to heap
+		./chain_test.go:6:2: moved to heap: n
+		./chain_test.go:7:9: func literal escapes to heap
+		./chain_test.go:15:13: ... argument does not escape
+		./chain_test.go:15:16: in() escapes to heap
+		./chain_test.go:16:13: ... argument does not escape
+		./chain_test.go:16:16: in() escapes to heap
 	*/
 	/*
 		根据变量类型是否确定

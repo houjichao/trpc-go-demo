@@ -21,10 +21,10 @@ func bar() {
 }
 
 /*
-go build -gcflags "-m -l" main.go
+go build -gcflags "-m -l" chain_test.go
 # command-line-arguments
-./main.go:4:15: make([]int, 8191) does not escape
-./main.go:11:15: make([]int, 8192) escapes to heap
+./chain_test.go:4:15: make([]int, 8191) does not escape
+./chain_test.go:11:15: make([]int, 8192) escapes to heap
 */
 
 /*

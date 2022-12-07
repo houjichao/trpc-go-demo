@@ -16,7 +16,7 @@ package main
 	栈资源的分配及回收速度比堆要快，所以逃逸分析最大的好处应该是减少了GC的压力。
 
 	使用命令go build -gcflags “-m -l” main.go可以分析变量是否逃逸
-	go build -gcflags "-m -m -l" main.go 更详细
+	go build -gcflags "-m -m -l" chain_test.go 更详细
  */
 //指针逃逸
 //典型的指针逃逸案例，返回局部变量的指针
@@ -30,12 +30,12 @@ func main() {
 	println(*c2)
 
 	/*
-	go build -gcflags "-m -m -l" main.go
+	go build -gcflags "-m -m -l" chain_test.go
 	# command-line-arguments
-	./main.go:24:2: c1 escapes to heap:
-	./main.go:24:2:   flow: ~r0 = &c1:
-	./main.go:24:2:     from &c1 (address-of) at ./main.go:25:9
-	./main.go:24:2:     from return &c1 (return) at ./main.go:25:2
-	./main.go:24:2: moved to heap: c1
+	./chain_test.go:24:2: c1 escapes to heap:
+	./chain_test.go:24:2:   flow: ~r0 = &c1:
+	./chain_test.go:24:2:     from &c1 (address-of) at ./chain_test.go:25:9
+	./chain_test.go:24:2:     from return &c1 (return) at ./chain_test.go:25:2
+	./chain_test.go:24:2: moved to heap: c1
 	 */
 }
