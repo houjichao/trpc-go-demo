@@ -1,4 +1,4 @@
-package learn2
+package pointer
 
 import "fmt"
 
